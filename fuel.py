@@ -1,24 +1,28 @@
 # Implement a program that prompts user for a fraction and catch exceptions and errors then print the fuel in tank
 def main():
-    fuel = error()
-    if fuel <= 1:
-        print("E")
-    elif fuel >= 99:
-        print("F")
+        fuel = input("Fraction: ")
+        print(f"{gauge(convert(fuel))}")
+
+def convert(n):
+        x , y = n.split("/")
+        x = int(x)
+        y = int(y)
+
+        if y == 0:
+             raise ZeroDivisionError
+        if x > y:
+             raise ValueError
+    
+        percent = round((x/y)*100)
+        return percent
+
+def gauge(z):
+    if z <= 1:
+        return "E"
+    elif z >= 99:
+        return "F"
     else:
-        print(f"{round(fuel)}%")
+        return f"{z}%"
 
-def error():
-    while True:
-        try:
-            x , y = input("Fraction: ").split("/")
-            x = int(x)
-            y = int(y)
-
-            if x > y or y == 0:
-                continue
-            return (x/y)*100
-        except (ValueError,ZeroDivisionError):
-            pass
-
-main()
+if __name__ == "__main__":
+    main()
